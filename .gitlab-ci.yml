@@ -1,0 +1,36 @@
+image: mcr.microsoft.com/playwright/python:v1.47.0
+
+stages: [monitor]
+
+variables:
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PIP_NO_CACHE_DIR: "1"
+  # Use the repo's data dir for state
+  DATA_DIR: "data"
+  PYTHONDONTWRITEBYTECODE: "1"
+
+monitor:
+  stage: monitor
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: on_success
+    - when: never   # only run from schedules; manual pipelines won’t trigger by default
+  before_script:
+    - python -V
+    - pip install -r requirements.txt
+    - python -m playwright install --with-deps chromium
+    - mkdir -p "$DATA_DIR"
+  script:
+    - python link_monitor.py
+  artifacts:
+    when: always
+    expire_in: 90 days
+    paths:
+      - data/*.json
+      - data/*.txt
+      - data/*.png
+  cache:
+    # cache helps speed; artifacts preserve state across pipelines
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .cache/pip

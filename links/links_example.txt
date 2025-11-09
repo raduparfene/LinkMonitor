@@ -1,0 +1,2 @@
+https://example1.com/, Legacy-Announce
+https://example2.com, New-Announce

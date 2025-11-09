@@ -1,0 +1,7 @@
+# never commit state or secrets
+data/
+.env
+__pycache__/
+*.pyc
+links/
+.idea/

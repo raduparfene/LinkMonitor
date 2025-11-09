@@ -1,0 +1,5 @@
+requests
+beautifulsoup4
+certifi
+python-dotenv
+playwright==1.55.0
