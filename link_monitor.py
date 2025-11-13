@@ -96,9 +96,13 @@ def get_content(url: str) -> str:
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
     }
-    resp = requests.get(url, headers=headers, verify=os.environ.get("LM_REQUESTS_CA_BUNDLE"))
-
-    # resp = requests.get(url, headers=headers)
+    try:
+        resp = requests.get(url, headers=headers, verify=os.environ.get("LM_REQUESTS_CA_BUNDLE"), timeout=15)
+        resp.raise_for_status()
+    except requests.exceptions.Timeout:
+        print(f"[WARN] Timeout la {url}")
+    except requests.exceptions.RequestException as e:
+        print(f"[ERROR] ERROR la {url}")
 
     # Try to parse HTML and strip script/style/nav etc.
     text = resp.text
