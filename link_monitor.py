@@ -142,7 +142,7 @@ def latest_shot_path(title: str) -> Optional[str]:
 
 
 def take_screenshot_to(url: str, dest_path: str) -> bool:
-    from playwright.sync_api import sync_playwright  # type: ignore
+    from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError  # type: ignore
 
     ensure_dirs(os.path.dirname(dest_path))
     with sync_playwright() as p:
@@ -152,11 +152,22 @@ def take_screenshot_to(url: str, dest_path: str) -> bool:
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
         )
         page = context.new_page()
-        page.goto(url, wait_until="domcontentloaded", timeout=30000)
-        page.screenshot(path=dest_path, full_page=True)
-        context.close()
-        browser.close()
-    return True
+        try:
+            try:
+                page.goto(url, wait_until="domcontentloaded", timeout=30000)
+            except PlaywrightTimeoutError as e:
+                print(f"[WARN] Page load timeout for {url}: {e} – taking partial screenshot.")
+            page.wait_for_timeout(3000)
+            page.screenshot(path=dest_path, full_page=True)
+            return True
+
+        except Exception as e:
+            print(f"[WARN] Screenshot failed at {url}: {e}")
+            return False
+
+        finally:
+            context.close()
+            browser.close()
 
 
 # ----------------------------
