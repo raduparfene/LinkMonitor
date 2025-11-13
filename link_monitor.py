@@ -100,9 +100,11 @@ def get_content(url: str) -> str:
         resp = requests.get(url, headers=headers, verify=os.environ.get("LM_REQUESTS_CA_BUNDLE"), timeout=15)
         resp.raise_for_status()
     except requests.exceptions.Timeout:
-        print(f"[WARN] Timeout la {url}")
+        print(f"[WARN] Timeout at {url}")
+        return ""
     except requests.exceptions.RequestException as e:
-        print(f"[ERROR] ERROR la {url}")
+        print(f"[ERROR] ERROR at {url}")
+        return ""
 
     # Try to parse HTML and strip script/style/nav etc.
     text = resp.text
@@ -186,7 +188,7 @@ def send_email(subject: str, html_body: str, attachments: Optional[List[Tuple[st
         msg.attach(part)
 
     context = ssl.create_default_context()
-    with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+    with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15) as server:
         server.starttls(context=context)
         server.login(SMTP_EMAIL, SMTP_PASSWORD)
         server.sendmail(SMTP_EMAIL, TO_ADDRESSES, msg.as_string())

@@ -19,7 +19,7 @@ run_script:
     - python -m playwright install --with-deps chromium
     - mkdir -p data
   script:
-    - python link_monitor.py
+    - python -u link_monitor.py
   artifacts:
     when: always
     expire_in: 90 days
