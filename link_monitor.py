@@ -1,3 +1,4 @@
+import base64
 import csv
 import glob
 import os
@@ -18,6 +19,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+
+from urllib3.util.util import to_str
 
 # ----------------------------
 # Config
@@ -53,6 +56,10 @@ SMTP_HOST = os.environ.get("LM_SMTP_HOST")
 SMTP_PORT = int(os.environ.get("LM_SMTP_PORT"))
 SMTP_EMAIL = os.environ.get("LM_SMTP_EMAIL")
 SMTP_PASSWORD = os.environ.get("LM_SMTP_PASSWORD")
+base64_bytes = SMTP_PASSWORD.encode("ascii")
+sample_string_bytes = base64.b64decode(base64_bytes)
+SMTP_PASSWORD = sample_string_bytes.decode("ascii")
+
 TO_ADDRESSES = os.environ.get("LM_TO", SMTP_EMAIL).split(",")
 
 
