@@ -1,29 +1,18 @@
-image: python:3.12.8
-
 stages:
   - run
 
 variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  GIT_STRATEGY: none
+  TIMEOUT: 600
 
-cache:
-  paths:
-    - .cache/pip
-    - data/
-
-run_script:
+run_link_monitor:
   stage: run
-  before_script:
-    - pip install --upgrade pip
-    - pip install -r requirements.txt
-    - python -m playwright install --with-deps chromium
-    - mkdir -p data
+  image: python:3.12
+  timeout: 10m
   script:
-    - python -u link_monitor.py
-  artifacts:
-    when: always
-    expire_in: 90 days
-    paths:
-      - data/*.json
-      - data/*.txt
-      - data/*.png
+    # ---------------------------------------------------
+    # 1. Instalăm AWS CLI & SSH tools
+    # ---------------------------------------------------
+    - apt-get update -y
+    - apt-get install -y awscli openssh-client
+
