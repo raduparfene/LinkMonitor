@@ -1,0 +1,7 @@
+region            = ""
+ami_id            = ""
+instance_type     = ""
+vpc_id            = ""
+subnet_id         = ""
+key_pair_name     = ""
+eip_allocation_id = ""

@@ -14,3 +14,4 @@ links/
 /aws/credentials
 /aws/config
 /aws/shell_scripts/environment.properties
+/terraform/variables.tf
