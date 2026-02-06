@@ -20,7 +20,6 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-from urllib3.util.util import to_str
 
 # ----------------------------
 # Config
@@ -147,6 +146,13 @@ def take_screenshot_to(url: str, dest_path: str) -> bool:
         )
         page = context.new_page()
         page.goto(url, wait_until="domcontentloaded", timeout=30000)
+
+        try:
+            page.wait_for_load_state("networkidle", timeout=5000)
+        except:
+            pass
+        page.wait_for_timeout(3000)
+
         page.screenshot(path=dest_path, full_page=True)
         context.close()
         browser.close()

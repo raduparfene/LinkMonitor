@@ -5,3 +5,12 @@ __pycache__/
 *.pyc
 links/
 .idea/
+/terraform/.terraform/
+/terraform/terraform.tfstate
+/terraform/.terraform.lock.hcl
+/terraform/terraform.tfstate.backup
+/aws/login-key
+/aws/login-key.pub
+/aws/credentials
+/aws/config
+/aws/shell_scripts/environment.properties

@@ -3,16 +3,79 @@ stages:
 
 variables:
   GIT_STRATEGY: none
-  TIMEOUT: 600
 
 run_link_monitor:
   stage: run
   image: python:3.12
-  timeout: 10m
+  timeout: 1h
   script:
     # ---------------------------------------------------
-    # 1. Instalăm AWS CLI & SSH tools
+    # RANDOM WAIT: 0–2699 sec (0–45 min)
+    # ---------------------------------------------------
+    - |
+      DELAY=$(( RANDOM % 2699 ))
+      echo "Random delay: $DELAY seconds"
+      sleep $DELAY  
+
+    # ---------------------------------------------------
+    # AWS CLI & SSH tools
     # ---------------------------------------------------
     - apt-get update -y
     - apt-get install -y awscli openssh-client
 
+    # ---------------------------------------------------
+    # Private key for SSH
+    # ---------------------------------------------------
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/login-key
+    - chmod 600 ~/.ssh/login-key
+
+    # ---------------------------------------------------
+    # Verify instance state
+    # ---------------------------------------------------
+    - |
+      INSTANCE_STATE=$(aws ec2 describe-instances --instance-ids "$AWS_EC2_INSTANCE_ID" \
+        --query "Reservations[0].Instances[0].State.Name" --output text)
+      echo "Instance state is: $INSTANCE_STATE"
+
+    # ---------------------------------------------------
+    # If stopped -> start it
+    # ---------------------------------------------------
+    - |
+      if [ "$INSTANCE_STATE" = "stopped" ]; then
+        echo "Starting EC2 instance..."
+        aws ec2 start-instances --instance-ids "$AWS_EC2_INSTANCE_ID"
+        echo "Waiting for instance to come online..."
+        aws ec2 wait instance-running --instance-ids "$AWS_EC2_INSTANCE_ID"
+      fi
+
+    # ---------------------------------------------------
+    # Wait for SSH to be available
+    # ---------------------------------------------------
+    - echo "Waiting for SSH availability..."
+    - |
+      for i in {1..20}; do
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/login-key ubuntu@$AWS_EC2_PUBLIC_IP "echo connected" && break;
+        echo "Retry SSH... ($i)";
+        sleep 5;
+      done
+
+    # ---------------------------------------------------
+    # Execute Python script on EC2
+    # ---------------------------------------------------
+    - echo "Running script on EC2..."
+    - ssh -o StrictHostKeyChecking=no -i ~/.ssh/login-key ubuntu@$AWS_EC2_PUBLIC_IP "
+        cd ~/LinkMonitor &&
+        source venv/bin/activate &&
+        python link_monitor.py
+      "
+
+    # ---------------------------------------------------
+    # Stop the instance
+    # ---------------------------------------------------
+    - echo "Stopping EC2 instance..."
+    - aws ec2 stop-instances --instance-ids "$AWS_EC2_INSTANCE_ID"
+    - aws ec2 wait instance-stopped --instance-ids "$AWS_EC2_INSTANCE_ID"
+
+  only:
+    - main
