@@ -11,7 +11,7 @@ AmazonVPCReadOnlyAccess
 5. CLI option
 6. Copy the ```Secret access key```, as you are prompted ```This is the only time that the secret access key can be viewed or downloaded. You cannot recover it later. However, you can create a new access key any time```:
 
-![img_1.png](../docs-pictures/aws access key.png)
+![img_1.png](../docs-pictures/aws%20access%20key.png)
 
 7. Create ```credentials``` **file** in ~/.aws with the following content:
 ```

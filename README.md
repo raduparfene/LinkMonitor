@@ -20,7 +20,7 @@ export LM_PROFILE="news" # you can monitor different types of links: links_examp
 ```
 For Google, this is where you would you generate that App password key
 
-![img.png](docs-pictures/google app passwords.png)
+![img.png](docs-pictures/google%20app%20passwords.png)
 
 2) Add your links inside `links_example-profile.txt` like so:
 ```text
