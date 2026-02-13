@@ -1,5 +1,8 @@
 name: AWS EC2 Control
-on: [push] # run at each push on main
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # activate running manually
 
 jobs:
   manage_aws:
