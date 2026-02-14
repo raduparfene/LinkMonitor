@@ -1,4 +1,3 @@
-import base64
 import csv
 import glob
 import os
@@ -55,10 +54,6 @@ SMTP_HOST = os.environ.get("LM_SMTP_HOST")
 SMTP_PORT = int(os.environ.get("LM_SMTP_PORT"))
 SMTP_EMAIL = os.environ.get("LM_SMTP_EMAIL")
 SMTP_PASSWORD = os.environ.get("LM_SMTP_PASSWORD")
-base64_bytes = SMTP_PASSWORD.encode("ascii")
-sample_string_bytes = base64.b64decode(base64_bytes)
-SMTP_PASSWORD = sample_string_bytes.decode("ascii")
-
 TO_ADDRESSES = os.environ.get("LM_TO", SMTP_EMAIL).split(",")
 
 

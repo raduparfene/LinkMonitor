@@ -2,7 +2,7 @@
 set -euo pipefail
 
 set -a
-source environment.properties
+source ./aws/shell_scripts/environment.properties
 set +a
 
 : "${ELIP:?ELIP is missing/empty in environment.properties}"

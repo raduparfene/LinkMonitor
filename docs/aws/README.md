@@ -10,8 +10,9 @@ AmazonVPCReadOnlyAccess
 4. Create Access Keys: choose linkmonitor-automation user -> **Security credentials** Tab -> **Create access key**
 5. CLI option
 6. Copy the ```Secret access key```, as you are prompted ```This is the only time that the secret access key can be viewed or downloaded. You cannot recover it later. However, you can create a new access key any time```:
+- this is what it should look like (it's an example, not my actual key):
 
-![img_1.png](../docs-pictures/aws%20access%20key.png)
+![img_1.png](../pictures/aws-access-key.png)
 
 7. Create ```credentials``` **file** in ~/.aws with the following content:
 ```

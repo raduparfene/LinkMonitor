@@ -9,7 +9,7 @@ sudo apt update
 terraform -v
 ```
 
-# Inside project root directory, execute:
+# Inside project root directory, execute these, to create the infrastructure:
 ```shell
 terraform -chdir=terraform destroy -auto-approve 
 terraform -chdir=terraform init

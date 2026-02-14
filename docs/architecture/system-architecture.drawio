@@ -1,0 +1,72 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.2">
+  <diagram name="Page-1" id="NfMtlfQDjfanECYm6Ci2">
+    <mxGraphModel dx="983" dy="518" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-9" edge="1" parent="1" source="vKq_fyx9OXa0weYKwYG1-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#a20025;strokeColor=#6F0000;" target="vKq_fyx9OXa0weYKwYG1-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-11" connectable="0" parent="vKq_fyx9OXa0weYKwYG1-9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="default for 400 min / Month,&lt;div&gt;then paid&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.0241" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-10" edge="1" parent="1" source="vKq_fyx9OXa0weYKwYG1-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#60a917;strokeColor=#2D7600;" target="vKq_fyx9OXa0weYKwYG1-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-14" connectable="0" parent="vKq_fyx9OXa0weYKwYG1-10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="additional configuration&lt;div&gt;for self hosted,&lt;br&gt;&lt;div&gt;but free 24/7 📅&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0565" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d0cee2;strokeColor=#56517e;" value="CI / CD&lt;div&gt;pipeline with GitLab&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" value="Git Machine" vertex="1">
+          <mxGeometry height="60" width="120" x="240" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" value="OCI 24/7 ARM Machine" vertex="1">
+          <mxGeometry height="60" width="120" x="240" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-12" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="180" y="200" as="sourcePoint" />
+            <mxPoint x="220" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-13" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="220" y="200" as="sourcePoint" />
+            <mxPoint x="180" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" value="AWS Machine&lt;div&gt;(with LinkMonitor)&lt;/div&gt;&lt;div&gt;-&lt;/div&gt;&lt;div&gt;PayAsYouGo&lt;/div&gt;&lt;div&gt;budget&lt;/div&gt;&lt;div&gt;Friendly&lt;/div&gt;" vertex="1">
+          <mxGeometry height="360" width="160" x="400" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-16" edge="1" parent="1" source="vKq_fyx9OXa0weYKwYG1-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.003;entryY=0.138;entryDx=0;entryDy=0;entryPerimeter=0;" target="vKq_fyx9OXa0weYKwYG1-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-18" connectable="0" parent="vKq_fyx9OXa0weYKwYG1-16" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="α" vertex="1">
+          <mxGeometry relative="1" x="0.0406" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-17" edge="1" parent="1" source="vKq_fyx9OXa0weYKwYG1-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.003;entryY=0.862;entryDx=0;entryDy=0;entryPerimeter=0;" target="vKq_fyx9OXa0weYKwYG1-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-19" connectable="0" parent="vKq_fyx9OXa0weYKwYG1-17" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="α" vertex="1">
+          <mxGeometry relative="1" x="-0.1658" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-20" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="α cronjob 🕔:&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;random (0 - 45 min)&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;delay random&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;ON aws EC2 instance&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;exec py script&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;OFF aws EC2 instance&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="160" x="600" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="vKq_fyx9OXa0weYKwYG1-22" parent="1" style="text;html=1;whiteSpace=wrap;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="1. Create AWS instance with Terraform&lt;div&gt;2. Create OCI instance with Terraform&lt;/div&gt;&lt;div&gt;- but also configure properties&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="220" x="570" y="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
