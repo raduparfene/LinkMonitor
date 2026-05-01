@@ -99,13 +99,24 @@ def get_content(url: str) -> str:
     except:
         resp = requests.get(url, headers=headers, verify=False)
 
-    # Try to parse HTML and strip script/style/nav etc.
     text = resp.text
     soup = BeautifulSoup(text, "html.parser")
-    for tag in soup(["script", "style", "noscript"]):
+    for tag in soup(["script", "style", "noscript", "footer", "nav"]):
         tag.decompose()
-    # Optional: collapse whitespace
-    content = " ".join(soup.get_text(separator=" ").split())
+
+    content = soup.get_text(separator="\n")
+
+    clean_lines = []
+    for line in content.splitlines():
+        line = line.strip()
+        if len(line) > 5:
+            line = re.sub(r'(?i)\b(today|yesterday|acum|ieri|astăzi|minutes? ago|hours? ago)\b', '', line)
+            clean_lines.append(line)
+
+    content = " ".join(clean_lines)
+
+    content = re.sub(r'\s+', ' ', content).strip()
+
     # Fallback to raw text if parsing failed terribly
     return content if content else text
 
@@ -139,13 +150,16 @@ def take_screenshot_to(url: str, dest_path: str) -> bool:
 
     ensure_dirs(os.path.dirname(dest_path))
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(
+            headless=True,
+            args=["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"]
+        )
         context = browser.new_context(
             viewport={"width": 1366, "height": 768},
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
         )
         page = context.new_page()
-        page.goto(url, wait_until="domcontentloaded", timeout=30000)
+        page.goto(url, wait_until="domcontentloaded", timeout=60000)
 
         try:
             page.wait_for_load_state("networkidle", timeout=5000)
