@@ -1,4 +1,4 @@
-# 🔗💻 LinkMonitor: Hybrid Cloud Automation
+# 🔗💻 LinkMonitor
 - Smart web monitoring system on a budget
 - It monitors web pages, notifying through emails any content change 
 
